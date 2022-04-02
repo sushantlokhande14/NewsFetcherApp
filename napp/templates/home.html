@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>NewsFetcherApp</title>
+	<style> * {font-size:30px;}</style>
+</head>
+<body style="background-color:lavender;">
+<center>
+<h1>NEWS FETCHER APP BY SUSHANT</h1>
+<form method="POST">
+{% csrf_token %}
+	<select name="src">
+		<option value="in">INDIA</option>
+		<option value="us">UNITED STATES</option>
+		<option value="au">AUSTRALIA</option>
+		<option value="ru">RUSSIA</option>
+	</select>
+	<br><br>
+	<input type="submit" value="GET HEADLINES">
+
+</form>
+{% if src %}
+	<h2>News from {{src}} </h2>
+	{% for i in info %}
+		<hr>
+		<h2>{{ i.title }}<h2>
+		<a href="{{i.url}}">ReadMore</a>
+		<br>
+		{% if i.urlToImage %}
+			<img src={{ i.urlToImage }} style="width:300px; height:auto; " ></img>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+</center>
+</body>
+</html>
